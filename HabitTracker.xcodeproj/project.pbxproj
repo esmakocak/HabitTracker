@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40940EE52C67C82000F65B53 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40940EE42C67C82000F65B53 /* Home.swift */; };
 		40F3B1752C67BFBE007A1FC7 /* HabitTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3B1742C67BFBE007A1FC7 /* HabitTrackerApp.swift */; };
 		40F3B1772C67BFBE007A1FC7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3B1762C67BFBE007A1FC7 /* ContentView.swift */; };
 		40F3B1792C67BFC1007A1FC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40F3B1782C67BFC1007A1FC7 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		40940EE42C67C82000F65B53 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		40F3B1712C67BFBE007A1FC7 /* HabitTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HabitTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40F3B1742C67BFBE007A1FC7 /* HabitTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerApp.swift; sourceTree = "<group>"; };
 		40F3B1762C67BFBE007A1FC7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +38,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40940EE22C67C7D800F65B53 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				40940EE42C67C82000F65B53 /* Home.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		40940EE32C67C7DC00F65B53 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		40F3B1682C67BFBE007A1FC7 = {
 			isa = PBXGroup;
 			children = (
@@ -55,6 +72,8 @@
 		40F3B1732C67BFBE007A1FC7 /* HabitTracker */ = {
 			isa = PBXGroup;
 			children = (
+				40940EE32C67C7DC00F65B53 /* ViewModel */,
+				40940EE22C67C7D800F65B53 /* View */,
 				40F3B1742C67BFBE007A1FC7 /* HabitTrackerApp.swift */,
 				40F3B1762C67BFBE007A1FC7 /* ContentView.swift */,
 				40F3B1782C67BFC1007A1FC7 /* Assets.xcassets */,
@@ -145,6 +164,7 @@
 			files = (
 				40F3B17E2C67BFC1007A1FC7 /* Persistence.swift in Sources */,
 				40F3B1812C67BFC1007A1FC7 /* HabitTracker.xcdatamodeld in Sources */,
+				40940EE52C67C82000F65B53 /* Home.swift in Sources */,
 				40F3B1772C67BFBE007A1FC7 /* ContentView.swift in Sources */,
 				40F3B1752C67BFBE007A1FC7 /* HabitTrackerApp.swift in Sources */,
 			);
