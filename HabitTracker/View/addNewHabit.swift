@@ -25,15 +25,25 @@ struct addNewHabit: View {
                         Circle()
                             .fill(Color(color))
                             .frame(width: 30, height: 30)
-                            .frame(maxWidth: .infinity)
                             .overlay {
                                 if color == habitModel.habitColor{
                                     Image(systemName: "checkmark")
                                         .font(.caption.bold())
                                 }
                             }
+                            .onTapGesture {
+                                withAnimation {
+                                    habitModel.habitColor = color
+                                }
+                            }
+                            .frame(maxWidth: .infinity)
                     }
                 }
+                .padding(.vertical)
+                
+                Divider()
+                
+                // MARK: Frequency Selection
 
             }
             .frame(maxHeight: .infinity, alignment: .top)
