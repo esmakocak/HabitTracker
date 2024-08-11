@@ -75,7 +75,42 @@ struct addNewHabit: View {
                     .padding(.top, 15)
                 }
                 
+                Divider()
+                    .padding(.vertical, 10)
                 
+                // MARK: Remainder
+                HStack {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Remainder")
+                            .fontWeight(.semibold)
+                        
+                        Text("Just Notification")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Toggle(isOn: $habitModel.isRemainderOn) {}
+                        .labelsHidden()
+                }
+                
+                HStack(spacing: 10){
+                    Label {
+                        Text(habitModel.remainderDate.formatted(date: .omitted, time: .shortened))
+                    } icon: {
+                        Image(systemName: "clock")
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 12)
+                    .background(Color("TFBG").opacity(0.6), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                    
+                    TextField("Remainder Text", text: $habitModel.remainderText)
+                        .padding(.horizontal)
+                        .padding(.vertical, 10)
+                        .background(Color("TFBG").opacity(0.6), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                }
+                .frame(height: habitModel.isRemainderOn ? nil : 0)
+                .opacity(habitModel.isRemainderOn ? 1 : 0)
                 
             }
             .frame(maxHeight: .infinity, alignment: .top)
