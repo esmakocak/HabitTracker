@@ -44,7 +44,39 @@ struct addNewHabit: View {
                 Divider()
                 
                 // MARK: Frequency Selection
-
+                VStack(alignment: .leading , spacing: 6) {
+                    Text("Frequency")
+                        .font(.callout.bold())
+                    let weekDays = Calendar.current.weekdaySymbols
+                    HStack(spacing: 10){
+                        ForEach(weekDays, id: \.self){ day in
+                            let index = habitModel.weekDays.firstIndex { value in
+                                return value == day
+                            } ?? -1
+                            // limiting to first 2 letters
+                            Text(day.prefix(2))
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 12)
+                                .background{
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous).fill(index != -1 ? Color(habitModel.habitColor) : Color("TFBG").opacity(0.6))
+                                }
+                                .onTapGesture {
+                                    withAnimation {
+                                        if index != -1 {
+                                            habitModel.weekDays.remove(at: index)
+                                        } else {
+                                            habitModel.weekDays.append(day)
+                                        }
+                                    }
+                                }
+                        }
+                    }
+                    .padding(.top, 15)
+                }
+                
+                
+                
             }
             .frame(maxHeight: .infinity, alignment: .top)
             .padding()
