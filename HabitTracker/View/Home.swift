@@ -142,6 +142,8 @@ habits: FetchedResults<Habit>
         }
         .onTapGesture {
             // MARK: Edit Habit
+            habitModel.editHabit = habit
+            habitModel.restoreEditData()
             habitModel.addNewHabit.toggle()
         }
     }

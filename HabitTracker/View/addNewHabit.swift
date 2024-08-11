@@ -80,6 +80,7 @@ struct addNewHabit: View {
                 Divider()
                     .padding(.vertical, 10)
                 
+                // Hiding if notification access is rejected
                 // MARK: Remainder
                 HStack {
                     VStack(alignment: .leading, spacing: 6) {
@@ -95,6 +96,7 @@ struct addNewHabit: View {
                     Toggle(isOn: $habitModel.isRemainderOn) {}
                         .labelsHidden()
                 }
+                .opacity(habitModel.notificationAccess ? 1 : 0)
                 
                 HStack(spacing: 10){
                     Label {
@@ -118,12 +120,14 @@ struct addNewHabit: View {
                 }
                 .frame(height: habitModel.isRemainderOn ? nil : 0)
                 .opacity(habitModel.isRemainderOn ? 1 : 0)
+                .opacity(habitModel.notificationAccess ? 1 : 0)
+
                 
             }
             .frame(maxHeight: .infinity, alignment: .top)
             .padding()
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Add Habit")
+            .navigationTitle(habitModel.editHabit != nil ? "Edit Habit" : "Add Habit")
             .toolbar{
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
@@ -132,6 +136,19 @@ struct addNewHabit: View {
                         Image(systemName: "xmark.circle")
                     }
                     .tint(.primary)
+                }
+                
+                // MARK: Delete Button
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        if habitModel.deleteHabit(context: env.managedObjectContext){
+                            env.dismiss()
+                        }
+                    } label: {
+                        Image(systemName: "trash")
+                    }
+                    .tint(.red)
+                    .opacity(habitModel.editHabit == nil ? 0 : 1)
                 }
                 
                 // MARK: Done Button for Add New Habit

@@ -22,6 +22,20 @@ class HabitViewModel: ObservableObject {
     // MARK: Remainder Time Picker
     @Published var showTimePicker: Bool = false
     
+    // MARK: Edit Habit
+    @Published var editHabit: Habit?
+    
+    // MARK: Notification Access Status
+    @Published var notificationAccess: Bool = false
+    
+    func requestNotificationAccess(){
+        UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert]) { status, _ in
+            DispatchQueue.main.async {
+                self.notificationAccess = status
+            }
+        }
+    }
+    
     // MARK: Adding Habit to Database
     func addHabit(context: NSManagedObjectContext) async -> Bool {
         let habit = Habit(context: context)
@@ -103,6 +117,31 @@ class HabitViewModel: ObservableObject {
         isRemainderOn = false
         remainderDate = Date()
         remainderText = ""
+        editHabit = nil
+    }
+    
+    // MARK: Delete Habit
+    func deleteHabit(context: NSManagedObjectContext) -> Bool {
+        if let editHabit = editHabit {
+            context.delete(editHabit)
+            if let _ = try? context.save(){
+                return true
+            }
+        }
+        return false
+    }
+    
+    
+    // MARK: Restoring Edit Data
+    func restoreEditData(){
+        if let editHabit = editHabit {
+            title = editHabit.title ?? ""
+            habitColor = editHabit.color ?? "Card-1"
+            weekDays = editHabit.weekDays ?? []
+            isRemainderOn = editHabit.isRemainderOn
+            remainderDate = editHabit.notificationDate ?? Date()
+            remainderText = editHabit.remainderText ?? ""
+        }
     }
     
     // MARK: Done Button Status
