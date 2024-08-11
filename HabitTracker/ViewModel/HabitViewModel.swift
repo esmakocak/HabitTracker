@@ -11,6 +11,7 @@ import CoreData
 class HabitViewModel: ObservableObject {
     // MARK: New Habit Properties
     @Published var addNewHabit: Bool = false
+    @Published var title: String = ""
     @Published var habitColor: String = "Card-1"
     @Published var weekDays: [String] = []
     @Published var isRemainderOn: Bool = false
