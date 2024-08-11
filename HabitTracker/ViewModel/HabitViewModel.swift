@@ -23,7 +23,7 @@ class HabitViewModel: ObservableObject {
     @Published var showTimePicker: Bool = false
     
     // MARK: Adding Habit to Database
-    func addHabit(context: NSManagedObjectContext) -> Bool {
+    func addHabit(context: NSManagedObjectContext) async -> Bool {
         let habit = Habit(context: context)
         habit.title = title
         habit.color = habitColor
@@ -34,6 +34,12 @@ class HabitViewModel: ObservableObject {
         habit.notificationIDs = []
         if isRemainderOn{
             // MARK: Scheduling Notifications
+            if let ids = try? await scheduleNotification(){
+                habit.notificationIDs =  ids
+                if let _ = try? context.save(){
+                    return true
+                }
+            }
         } else{
             // MARK: Adding Data
             if let _ = try? context.save(){

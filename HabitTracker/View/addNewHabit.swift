@@ -137,8 +137,10 @@ struct addNewHabit: View {
                 // MARK: Done Button for Add New Habit
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") {
-                        if habitModel.addHabit(context: env.managedObjectContext){
-                            env.dismiss()
+                        Task{
+                            if await habitModel.addHabit(context: env.managedObjectContext){
+                                env.dismiss()
+                            }
                         }
                     }
                     .tint(.primary)
