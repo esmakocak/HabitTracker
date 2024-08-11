@@ -17,5 +17,8 @@ class HabitViewModel: ObservableObject {
     @Published var isRemainderOn: Bool = false
     @Published var remainderText: String = ""
     @Published var remainderDate: Date = Date()
+    
+    // MARK: Remainder Time Picker
+    @Published var showTimePicker: Bool = false
 }
 
