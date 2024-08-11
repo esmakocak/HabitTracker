@@ -76,9 +76,9 @@
 				40940EE22C67C7D800F65B53 /* View */,
 				40F3B1742C67BFBE007A1FC7 /* HabitTrackerApp.swift */,
 				40F3B1762C67BFBE007A1FC7 /* ContentView.swift */,
-				40F3B1782C67BFC1007A1FC7 /* Assets.xcassets */,
 				40F3B17D2C67BFC1007A1FC7 /* Persistence.swift */,
 				40F3B17F2C67BFC1007A1FC7 /* HabitTracker.xcdatamodeld */,
+				40F3B1782C67BFC1007A1FC7 /* Assets.xcassets */,
 				40F3B17A2C67BFC1007A1FC7 /* Preview Content */,
 			);
 			path = HabitTracker;

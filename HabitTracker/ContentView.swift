@@ -13,10 +13,8 @@ struct ContentView: View {
         
         Home()
             .preferredColorScheme(.dark)
-        
     }
 }
-
 
 #Preview {
     ContentView()
