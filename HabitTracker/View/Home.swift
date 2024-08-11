@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Home: View {
     @FetchRequest(entity: Habit.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Habit.dateAdded, ascending: false)], predicate: nil, animation: .easeInOut) var
-        habits: FetchedResults<Habit>
+habits: FetchedResults<Habit>
     
     @StateObject var habitModel: HabitViewModel = .init()
     
@@ -26,7 +26,8 @@ struct Home: View {
                             .font(.title3)
                             .foregroundColor(.primary)
                     }
-            }
+                }
+                .padding(.bottom, 10)
             
             
             // make add button centered when habits empty
@@ -42,7 +43,7 @@ struct Home: View {
                         habitModel.addNewHabit.toggle()
                     } label: {
                         Label {
-                            Text("New habit")
+                            Text("New Habit")
                         } icon: {
                             Image(systemName: "plus.circle")
                         }
@@ -113,20 +114,45 @@ struct Home: View {
                             .font(.caption)
                             .foregroundColor(.gray)
                         
-                        let status = symbols.contains { day in
+                        let status = activeWeekDays.contains { day in
                             return day == item.0
                             
                         }
                         
-                        Text("")
+                        Text(getDate(date: item.1))
+                            .font(.system(size: 14))
+                            .fontWeight(.semibold)
+                            .padding(8)
+                            .background{
+                                Circle()
+                                    .fill(Color(habit.color ?? "Card-1"))
+                                    .opacity(status ? 1 : 0)
+                            }
                     }
+                    .frame(maxWidth: .infinity)
                 }
             }
+            .padding(.top, 15)
         }
-        
-        // MARK: Formatting Date
-        
+        .padding(.vertical)
+        .padding(.horizontal, 6)
+        .background{
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(Color("TFBG").opacity(0.5))
+        }
+        .onTapGesture {
+            // MARK: Edit Habit
+            habitModel.addNewHabit.toggle()
+        }
     }
+    
+    // MARK: Formatting Date
+    func getDate(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd"
+        return formatter.string(from: date)
+    }
+     
 }
 
 #Preview {
