@@ -23,7 +23,46 @@ class HabitViewModel: ObservableObject {
     
     // MARK: Adding Habit to Database
     func addHabit(context: NSManagedObjectContext)->Bool{
-        return false 
+        let habit = Habit(context: context)
+        habit.title = title
+        habit.color = habitColor
+        habit.weekDays = weekDays
+        habit.isRemainderOn = isRemainderOn
+        habit.remainderText = remainderText
+        habit.notificationDate = remainderDate
+        habit.notificationIDs = []
+        if isRemainderOn{
+            // MARK: Scheduling Notifications
+        } else{
+            // MARK: Adding Data
+            if let _ = try? context.save(){
+                return true
+            }
+        }
+        return false
+    }
+    
+    // MARK: Adding Notifications
+    
+    
+    // MARK: Clear Content
+    func resetData(){
+        title = ""
+        habitColor = "Card-1"
+        weekDays = []
+        isRemainderOn = false
+        remainderDate = Date()
+        remainderText = ""
+    }
+    
+    // MARK: Done Button Status
+    func doneStatus()-> Bool {
+        let remainderStatus = isRemainderOn ? remainderText == "" : false
+        
+        if title == "" || weekDays.isEmpty || remainderStatus{
+            return false
+        }
+        return true
     }
 }
 

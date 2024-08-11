@@ -55,8 +55,9 @@ struct Home: View {
         .frame(maxHeight: .infinity, alignment: .top)
         .padding()
         .sheet(isPresented: $habitModel.addNewHabit) {
-            // MARK: Erasing All Existing Content
-            
+            // MARK: Clear All Existing Content
+            // when user save a habit, clear addNewHabit screen.
+            habitModel.resetData()
         } content: {
             addNewHabit()
                 .environmentObject(habitModel)
