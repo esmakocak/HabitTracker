@@ -28,6 +28,10 @@ class HabitViewModel: ObservableObject {
     // MARK: Notification Access Status
     @Published var notificationAccess: Bool = false
     
+    init(){
+        requestNotificationAccess()
+    }
+    
     func requestNotificationAccess(){
         UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert]) { status, _ in
             DispatchQueue.main.async {
@@ -38,7 +42,15 @@ class HabitViewModel: ObservableObject {
     
     // MARK: Adding Habit to Database
     func addHabit(context: NSManagedObjectContext) async -> Bool {
-        let habit = Habit(context: context)
+        // MARK: Editing Data
+        var habit: Habit!
+        if let editHabit = editHabit{
+            habit = editHabit
+            // removing the notifications belong to habit
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: editHabit.notificationIDs ?? [])
+        } else {
+            habit = Habit(context: context)
+        }
         habit.title = title
         habit.color = habitColor
         habit.weekDays = weekDays
@@ -123,6 +135,9 @@ class HabitViewModel: ObservableObject {
     // MARK: Delete Habit
     func deleteHabit(context: NSManagedObjectContext) -> Bool {
         if let editHabit = editHabit {
+            if editHabit.isRemainderOn{
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: editHabit.notificationIDs ?? [])
+            }
             context.delete(editHabit)
             if let _ = try? context.save(){
                 return true
