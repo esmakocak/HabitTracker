@@ -24,7 +24,7 @@ struct Home: View {
                     } label: {
                         Image(systemName: "gearshape")
                             .font(.title3)
-                            .foregroundColor(.white)
+                            .foregroundColor(.primary)
                     }
             }
             
@@ -43,7 +43,7 @@ struct Home: View {
                             Image(systemName: "plus.circle")
                         }
                         .font(.callout.bold())
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                     }
                     .padding(.top, 15)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -55,13 +55,16 @@ struct Home: View {
         .frame(maxHeight: .infinity, alignment: .top)
         .padding()
         .sheet(isPresented: $habitModel.addNewHabit) {
-        
-        } content: {
+            // MARK: Erasing All Existing Content
             
+        } content: {
+            addNewHabit()
+                .environmentObject(habitModel)
         }
     }
 }
 
 #Preview {
     ContentView()
+        .preferredColorScheme(.dark)
 }

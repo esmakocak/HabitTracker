@@ -20,5 +20,10 @@ class HabitViewModel: ObservableObject {
     
     // MARK: Remainder Time Picker
     @Published var showTimePicker: Bool = false
+    
+    // MARK: Adding Habit to Database
+    func addHabit(context: NSManagedObjectContext)->Bool{
+        return false 
+    }
 }
 
