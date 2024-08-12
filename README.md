@@ -1,9 +1,13 @@
 **SwiftUI Habit Tracker App with Core Data Integration**
 
 **🚀 Features**
+
 **- Core Data Integration:** CRUD (Create, Read, Update, Delete) operations using Core Data, ensuring persistent data storage.
+
 **- Local and Scheduled Notifications:** Set up and manage local notifications, including scheduled notifications for reminding users about their habits.
+
 **- @FetchRequest and @ViewBuilder:** Property wrappers to fetch and display data efficiently.
+
 **- MVVM Architecture:** 
 
 
